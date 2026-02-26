@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = "Ingest customer data from Excel"
 
     def handle(self, *args, **kwargs):
-        df = pd.read_excel("/home/avi/vsCode/Alemeno/data/customer_data.xlsx")
+        df = pd.read_excel("data/customer_data.xlsx")
 
         # normalize column names
         df.columns = (

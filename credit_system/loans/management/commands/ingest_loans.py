@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = "Ingest loan data from Excel"
 
     def handle(self, *args, **kwargs):
-        df = pd.read_excel("/home/avi/vsCode/Alemeno/data/loan_data.xlsx")
+        df = pd.read_excel("data/loan_data.xlsx")
 
         df.columns = (
             df.columns
