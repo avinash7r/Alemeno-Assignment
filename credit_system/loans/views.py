@@ -4,7 +4,7 @@ from rest_framework import status
 
 from customers.models import Customer
 from loans.models import Loan
-from loans.serializers import CheckEligibilitySerializer, CreateLoanSerializer
+from loans.serializers import CheckEligibilitySerializer, CreateLoanSerializer, LoanDetailSerializer
 from loans.services import check_loan_eligibility, calculate_emi, check_loan_eligibility
 
 from dateutil.relativedelta import relativedelta
@@ -114,5 +114,19 @@ class CreateLoanView(APIView):
             },
             status=status.HTTP_201_CREATED
         )
+
+class ViewLoanView(APIView):
+
+    def get(self, request, loan_id):
+        try:
+            loan = Loan.objects.select_related("customer").get(id=loan_id)
+        except Loan.DoesNotExist:
+            return Response(
+                {"error": "Loan not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = LoanDetailSerializer(loan)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
