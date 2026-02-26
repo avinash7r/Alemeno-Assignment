@@ -5,3 +5,9 @@ class CheckEligibilitySerializer(serializers.Serializer):
     loan_amount = serializers.FloatField()
     interest_rate = serializers.FloatField()
     tenure = serializers.IntegerField()
+
+class CreateLoanSerializer(serializers.Serializer):
+    customer_id = serializers.IntegerField()
+    loan_amount = serializers.FloatField()
+    interest_rate = serializers.FloatField()
+    tenure = serializers.IntegerField()
