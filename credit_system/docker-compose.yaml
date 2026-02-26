@@ -27,6 +27,7 @@ services:
       python manage.py migrate &&
       python manage.py ingest_customers &&
       python manage.py ingest_loans &&
+      python manage.py reset_sequences &&
       gunicorn credit_system.wsgi:application --bind 0.0.0.0:8000
       "
     volumes:
