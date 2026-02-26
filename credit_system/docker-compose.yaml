@@ -39,5 +39,17 @@ services:
     depends_on:
       - db
 
+  test:
+    build: .
+    command: >
+      sh -c "
+      ./scripts/wait_for_db.sh &&
+      python manage.py test
+      "
+    env_file:
+      - .env
+    depends_on:
+      - db
+
 volumes:
   postgres_data:
