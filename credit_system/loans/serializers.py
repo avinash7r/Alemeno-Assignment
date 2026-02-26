@@ -33,3 +33,23 @@ class LoanDetailSerializer(serializers.ModelSerializer):
             "monthly_installment",
             "tenure",
         ]
+
+class LoanListSerializer(serializers.ModelSerializer):
+    repayments_left = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Loan
+        fields = [
+            "id",
+            "loan_amount",
+            "interest_rate",
+            "monthly_installment",
+            "repayments_left",
+        ]
+
+    def get_repayments_left(self, obj):
+        return obj.tenure - obj.emis_paid_on_time
+
+
+
+
